@@ -2,11 +2,10 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:instagramcolon/Models/Usermodel.dart' as Model;
 import 'package:instagramcolon/Resources/storage_methods.dart';
-import 'package:instagramcolon/Utils/utils.dart';
+
 
 class AuthMethods {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -17,7 +16,6 @@ class AuthMethods {
   Future<Model.User>getUserDetails()async{
   DocumentSnapshot documentSnapshot=await  _firestore.collection("users").doc(_firebaseAuth.currentUser!.uid).get();
   return  Model.User.fromsnap(documentSnapshot);
-
   }
 
 
@@ -43,7 +41,7 @@ class AuthMethods {
         String downloadUrl = await StorageMethods()
             .UploadImagesTostorage("profilePics", profile, false);
 
-        Model.User user = Model.User(email, bio, downloadUrl, username, [], []);
+        Model.User user = Model.User(email, bio, downloadUrl, username, [], [],_firebaseAuth.currentUser!.uid);
 
         _firestore
             .collection("users")

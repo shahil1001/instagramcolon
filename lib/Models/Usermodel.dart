@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class User {
   String email, bio, profileurl, username;
   List following, followers;
+  String uid;
 
   User(this.email, this.bio, this.profileurl, this.username, this.following,
-      this.followers);
+      this.followers,this.uid);
 
   Map<String, dynamic> toJson() => {
         "name": username,
@@ -14,7 +14,8 @@ class User {
         "bio": bio,
         "profile": profileurl,
         "followers": followers,
-        "following": following
+        "following": following,
+    "uid":uid
       };
 
    static User fromsnap(DocumentSnapshot documentSnapshot) {
@@ -25,6 +26,7 @@ class User {
         documentSnapshot.get("profile"),
         documentSnapshot.get("name"),
         documentSnapshot.get("following"),
-        documentSnapshot.get("followers"));
+        documentSnapshot.get("followers"),
+        documentSnapshot.get("uid"));
   }  // Making this method static otherwise I have to paas parameters
 }

@@ -5,7 +5,6 @@ import '../Models/Usermodel.dart';
 
 class UserProvider extends ChangeNotifier {
   User? _user; // initially is empty
-
   User ? get getUser => _user;
   // final AuthMethods _authMethods = AuthMethods();
 

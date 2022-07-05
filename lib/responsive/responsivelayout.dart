@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:instagramcolon/Providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'mobile_layout.dart';
+
 class ResponsiveLayout extends StatefulWidget {
   Widget mobilelayout, weblayout;
 
@@ -30,7 +32,7 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
         return widget.weblayout;
       } else {
         //mobile
-        return widget.mobilelayout;
+        return Mobilelayout();
       }
     });
   }

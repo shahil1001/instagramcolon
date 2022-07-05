@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramcolon/Providers/user_provider.dart';
 import 'package:instagramcolon/Screens/login_screen.dart';
+import 'package:instagramcolon/Utils/Colors.dart';
 
 import 'package:instagramcolon/responsive/mobile_layout.dart';
 import 'package:instagramcolon/responsive/responsivelayout.dart';
@@ -40,7 +41,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          theme: ThemeData.dark().copyWith(),
+          theme: ThemeData.dark().copyWith(
+            backgroundColor: mobileBackgroundColor
+          ),
           home: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             // it will see if user has logged in or out that reffers to authstate
