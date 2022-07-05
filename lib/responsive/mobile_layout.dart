@@ -12,7 +12,7 @@ class Mobilelayout extends StatelessWidget {
 model.User ? user=Provider.of<UserProvider>(context).getUser;
 
     return Scaffold(
-      body: Center(child: Text("${user!.bio}",style: TextStyle(color: Colors.white),)),
+      body: Center(child: Text(user!.bio,style: const TextStyle(color: Colors.white),)),
     );
   }
 }
