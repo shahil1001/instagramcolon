@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData.dark().copyWith(
-            backgroundColor: mobileBackgroundColor
+           scaffoldBackgroundColor: mobileBackgroundColor,
           ),
           home: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),

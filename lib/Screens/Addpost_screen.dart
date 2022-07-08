@@ -22,7 +22,7 @@ class AddpostScreen extends StatefulWidget {
 class _AddpostScreenState extends State<AddpostScreen> {
   Uint8List? _file;
   TextEditingController dicription = TextEditingController();
-
+bool _isLoading=false;
   @override
   void dispose() {
     super.dispose();
@@ -31,13 +31,22 @@ class _AddpostScreenState extends State<AddpostScreen> {
 
   void uploadPost(String uid, username,
       String ProfileUrl) async {
-
+setState(() {
+  _isLoading=true;
+});
     try {
       String res  = await FirestoreMethods()
           .UploadPost(dicription.text.trim(), _file!, uid, username, ProfileUrl);
       if(res=="succuss"){
         ShowMessage(context, "Posted!");
+        setState(() {
+          _isLoading=false;
+          _file=null;
+        });
       }else{
+        setState(() {
+          _isLoading=false;
+        });
         ShowMessage(context, res);
       }
 
@@ -70,14 +79,18 @@ class _AddpostScreenState extends State<AddpostScreen> {
               backgroundColor: mobileBackgroundColor,
               leading: IconButton(
                 icon: Icon(Icons.arrow_back),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _file=null;
+                  });
+                },
               ),
               actions: [
                 TextButton(
                     onPressed: () {
                       //TODO uploading post to FF
                       //TODO need to add this here user!.uid
-                     uploadPost(FirebaseAuth.instance.currentUser!.uid, user!.username,  user!.profileurl);
+                     uploadPost(FirebaseAuth.instance.currentUser!.uid, user.username,  user.profileurl);
                     },
                     child: const Text(
                       "Post",
@@ -88,6 +101,7 @@ class _AddpostScreenState extends State<AddpostScreen> {
             ),
             body: Column(
               children: [
+                _isLoading?LinearProgressIndicator():Container(),
                 Container(
                   padding: EdgeInsets.all(8),
                   child: Row(
@@ -96,7 +110,7 @@ class _AddpostScreenState extends State<AddpostScreen> {
                     children: [
                       CircleAvatar(
                         radius: 25,
-                        backgroundImage: NetworkImage(user!.profileurl),
+                        backgroundImage: NetworkImage(user.profileurl),
                       ),
                       SizedBox(
                           width: MediaQuery.of(context).size.width * 0.4,
