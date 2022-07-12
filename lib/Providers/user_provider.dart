@@ -12,6 +12,7 @@ class UserProvider extends ChangeNotifier {
     User user = await AuthMethods().getUserDetails();
     _user = user;
     print("in Provider  $_user");
-    notifyListeners(); // data of our global _user changed now notifayall
+    notifyListeners();
+    // data of our global _user changed now notifayall
   }
 }

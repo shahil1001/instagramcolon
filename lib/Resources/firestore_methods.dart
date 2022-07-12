@@ -24,4 +24,50 @@ class FirestoreMethods {
     }
     return res;
   }
+
+  Future<void> likePost(String postId, String Uid, List likes) async {
+    try {
+      if (likes.contains(Uid)) {
+        await _firestore.collection("posts").doc(postId).update({
+          "likes": FieldValue.arrayRemove([Uid])
+          // dislike the post beause i've already liked it
+        });
+      } else {
+        await _firestore.collection("posts").doc(postId).update({
+          "likes": FieldValue.arrayUnion([Uid])
+          //like the post
+        });
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+    //Like the post
+  }
+
+  Future<void> PostComment(String postId, String comment,
+      String picUrl, String uid, String name) async {
+    String CommentId = Uuid().v1();
+    try {
+      if (comment.isNotEmpty) {
+        await _firestore
+            .collection("posts")
+            .doc(postId)
+            .collection("comments")
+            .doc(CommentId)
+            .set({
+          "Comment": comment,
+          "picUrl": picUrl,
+          "uid": uid,
+          "name": name,
+          "time": DateTime.now(),
+          "commentId": CommentId
+        }).then((value) => print("Succussfully Commented!!!!!!"));
+      } else {
+        print("empty!");
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+    //Like the post
+  }
 }

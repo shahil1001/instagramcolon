@@ -40,11 +40,11 @@ class _MobilelayoutState extends State<Mobilelayout> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: mobileBackgroundColor,
       body: PageView(
-        children: [
-          HomeScreen(),
+        children: const [
+           HomeScreen(),
           Center(
               child: Text(
             "Search",
