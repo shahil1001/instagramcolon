@@ -1,8 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagramcolon/Screens/Search_screen.dart';
 import 'package:instagramcolon/Screens/home_screen.dart';
 
+
 import '../Screens/Addpost_screen.dart';
+
+import '../Screens/profile_screen.dart';
 import '../Utils/Colors.dart';
 
 class Mobilelayout extends StatefulWidget {
@@ -20,6 +26,7 @@ class _MobilelayoutState extends State<Mobilelayout> {
   void initState() {
     super.initState();
     pageController = PageController();
+
   }
 
   @override
@@ -40,27 +47,21 @@ class _MobilelayoutState extends State<Mobilelayout> {
 
   @override
   Widget build(BuildContext context) {
+
     return  Scaffold(
       backgroundColor: mobileBackgroundColor,
       body: PageView(
-        children: const [
-           HomeScreen(),
+        children:  [
+          HomeScreen(),// ProfileScreen(),
           Center(
-              child: Text(
-            "Search",
-            style: TextStyle(color: Colors.white),
-          )),
+              child: SearchScreen()),
           AddpostScreen(),
           Center(
               child: Text(
             "Notification",
             style: TextStyle(color: Colors.white),
           )),
-          Center(
-              child: Text(
-            "Profile",
-            style: TextStyle(color: Colors.white),
-          )),
+       ProfileScreen(Uid: FirebaseAuth.instance.currentUser!.uid),
         ],
         controller: pageController,
         onPageChanged: pagechanged,
@@ -93,3 +94,5 @@ class _MobilelayoutState extends State<Mobilelayout> {
     );
   }
 }
+
+

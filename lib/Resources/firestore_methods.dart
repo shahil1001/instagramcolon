@@ -70,4 +70,26 @@ class FirestoreMethods {
     }
     //Like the post
   }
+
+
+
+  Future <void>FollowUnfollow(String me ,String target)async{
+    DocumentSnapshot documentSnapshot=await _firestore.collection("users").doc(me).get();
+    List Myfollowing=documentSnapshot.get("following");
+    if(Myfollowing.contains(target)){
+      await _firestore.collection("users").doc(me).update({
+        "following":FieldValue.arrayRemove([target]),
+      });
+     await  _firestore.collection("users").doc(target).update({
+        "followers":FieldValue.arrayRemove([me]),
+      });
+    }else{
+      await _firestore.collection("users").doc(me).update({
+        "following":FieldValue.arrayUnion([target]),
+      });
+      await  _firestore.collection("users").doc(target).update({
+        "followers":FieldValue.arrayUnion([me]),
+      });
+    }
+  }
 }

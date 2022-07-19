@@ -41,7 +41,8 @@ bool _IsLoading=false;
         body: Center(
           child: Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 32),
+            padding: MediaQuery.of(context).size.width>600? EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/3):
+          EdgeInsets.symmetric(horizontal: 32),
             child: SingleChildScrollView(
               reverse: true,
               child: Column(

@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
               }
               return LoginScreen();
             },
-          ) //ResponsiveLayout(Mobilelayout(), Weblayout()),
+          )   //ResponsiveLayout(Mobilelayout(), Weblayout()),
 
           ),
     );

@@ -32,7 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         body: Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 32),
+          padding: MediaQuery.of(context).size.width>600? EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/3):
+          EdgeInsets.symmetric(horizontal: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
